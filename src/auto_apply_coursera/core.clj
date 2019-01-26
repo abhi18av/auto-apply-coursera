@@ -141,22 +141,24 @@
   (get-in dynamic-messages [:degree :hr :why-no-low-interest-loan]))
 
 
-(fill-el driver
-         (first (query-all driver {:fn/has-class "big-input-box"}))
-         "My reason for the application")
+(def dynamic-messages
+  (edn/read-string
+   (slurp "./_secrets/dynamic_messages.edn")))
+
+(def reason-for-financial-aid-application
+  (get-in dynamic-messages [:degree :hr :reason-for-financial-aid-application]))
 
 
-(fill-el driver
-         (second (query-all driver {:fn/has-class "big-input-box"}))
-         "How this course helps me achieve my goals")
+(def how-this-course-helps-in-my-goals
+  (get-in dynamic-messages [:degree :hr :how-this-course-helps-in-my-goals]))
 
-(fill-el driver
-         (nth (query-all driver {:fn/has-class "big-input-box"}) 2)
-         "Can't pay a low interest loan")
 
 
 (click-el driver
           (second (query-all driver {:fn/has-class "finaid-radio-button"})))
+
+(def why-no-low-interest-loan
+  (get-in dynamic-messages [:degree :hr :why-no-low-interest-loan]))
 
 
 (click-el driver
