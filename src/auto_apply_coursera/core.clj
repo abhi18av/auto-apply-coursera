@@ -1,6 +1,7 @@
 (ns auto-apply-coursera.core
   (:use etaoin.api)
-  (:require [etaoin.keys :as keys]))
+  (:require [etaoin.keys :as keys]
+            [clojure.edn :as edn]))
 
 ;; NOTE: https://github.com/igrishaev/etaoin
 
@@ -11,15 +12,33 @@
 
 (go driver "https://coursera.org/")
 
+;; TODO: Add proper wait times all along the flow
+
+;; TODO: Parallelize the application mechanism
+
+
 ;; NOTE: Fill the Log-in popup
 ;; TODO: Convert the code to the < doto construct >
 
 (click-el driver
           (query driver {:fn/has-text "Log In"}))
 
-(fill driver :active "abhi18av@gmail.com" keys/enter)
 
-(fill driver :active "harshit1893" keys/enter)
+;; Read the credentials from a different file
+(def credentials
+  (edn/read-string
+   (slurp "./_secrets/secrets.edn")))
+
+(def email
+  (:email credentials))
+
+(def password
+  (:password credentials))
+
+
+(fill driver :active email keys/enter)
+
+(fill driver :active password keys/enter)
 
 
 ;; URL of specialization
@@ -77,7 +96,7 @@
 (back driver)
 
 ;; TODO: Find a way to select from dropdown menu
-;; Need to execute this twice 
+;; Need to execute this twice
 (fill driver {:id "finaid-educationalBackground"} "College degree")
 
 
@@ -126,5 +145,3 @@
 
 (click-el driver
           (query driver {:fn/has-class "finaid-submit-bttn"}))
-
-
