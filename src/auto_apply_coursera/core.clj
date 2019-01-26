@@ -108,20 +108,32 @@
 
 (fill-el driver
          (first (query-all driver {:fn/has-class "big-input-box"}))
-         "My reason for the application")
+         "I am a recent College graduate from Computer Science degree and at that time I had my own startup so I skipped the college placements hoping that all the leads and opportunities related to my startup would really materialize. We were quite hopeful and I felt that it's worth the risk.
+
+Unfortunately, even though we tried our best the startup failed to take off and I have been left with no source of income and no business.  Now, I'm starting to look for a job with my background and since I'm already graduated I can't actually go back to my University campus for recruitment cells.
+
+Whatever savings I had I had invested in an MBA from the IGNOU, open university in India. I'm applying for the financial aid, in the hopes that the certificates would show my perspective employers the level of commitment I have towards my own growth and how I would be able to contribute in their organization in the same way.")
 
 
 (fill-el driver
          (second (query-all driver {:fn/has-class "big-input-box"}))
-         "How this course helps me achieve my goals")
+         "I believe that the single most important things behind successful and, more importantly, sustainable startups are the people who deeply influence the direction of the product and create the core organizational value.
 
-(fill-el driver
-         (nth (query-all driver {:fn/has-class "big-input-box"}) 2)
-         "Can't pay a low interest loan")
+When I look back at my own startup experience, I feel that the problem was not so much with the product but with the people and the culture of the organization. Which instead of enabling people, created a toxic environment which gave rise to inefficiency and an environment full of doubt.
+
+I'd like to complete this degree so that I'm able to manage the People cycle in my next company, enabling them to be constructive and productive in the organization and towards the product.
+
+What I'm planning is to apply for the jobs using LinkedIn, references and via direct queries - but so far I'm finding this to be tough. Perhaps, I lack skills - but that doesn't calm the sense of urgency in my mind. I came across Financial Aid option in Coursera hoping to enroll in the courses as a normal student and complete the courses with all my efforts, engage with the course community and find like minded people.")
 
 
 (click-el driver
           (second (query-all driver {:fn/has-class "finaid-radio-button"})))
+
+(fill-el driver
+         (nth (query-all driver {:fn/has-class "big-input-box"}) 2)
+         "At the moment I don't have any source of income and I'd like to invest in my knowledge and my skills to land a first job and later perhaps my own startup.
+
+I sincerely hope that the course team considers me worthy and gives me the opportunity to enroll in this course as a proper student.")
 
 
 (click-el driver
