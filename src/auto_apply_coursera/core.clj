@@ -124,6 +124,22 @@
 
 ;; Moving on to the big-input-box
 
+;; Read the credentials from a different file
+(def dynamic-messages
+  (edn/read-string
+   (slurp "./_secrets/dynamic_messages.edn")))
+
+(def reason-for-financial-aid-application
+  (get-in dynamic-messages [:degree :hr :reason-for-financial-aid-application]))
+
+
+(def how-this-course-helps-in-my-goals
+  (get-in dynamic-messages [:degree :hr :how-this-course-helps-in-my-goals]))
+
+
+(def why-no-low-interest-loan
+  (get-in dynamic-messages [:degree :hr :why-no-low-interest-loan]))
+
 
 (fill-el driver
          (first (query-all driver {:fn/has-class "big-input-box"}))
