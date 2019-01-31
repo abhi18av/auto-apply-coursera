@@ -51,9 +51,13 @@
 
 ;; URL of a course
 ;; https://www.coursera.org/learn/managing-human-resources
+;; https://www.coursera.org/learn/recruiting-hiring-onboarding-employees
+;; https://www.coursera.org/learn/employee-performance
+;; https://www.coursera.org/learn/compensation-management
+;; https://www.coursera.org/learn/human-resources-management-capstone
 
+(go driver "https://www.coursera.org/learn/compensation-management")
 
-(go driver "https://www.coursera.org/learn/managing-human-resources")
 
 ;; Click on < Financial Aid Available >
 
@@ -76,6 +80,8 @@
 (click-el driver
           (first (query-all driver {:fn/has-class "rc-Checkbox"})))
 
+
+
 (click-el driver
           (second (query-all driver {:fn/has-class "rc-Checkbox"})))
 
@@ -93,10 +99,10 @@
 
 ;; NOTE: Now we are the main application page
 
-(back driver)
+;(back driver)
 
 ;; TODO: Find a way to select from dropdown menu
-;; Need to execute this twice
+;; NOTE: Need to execute this four times
 (fill driver {:id "finaid-educationalBackground"} "College degree")
 
 
@@ -107,7 +113,7 @@
          (first (query-all driver {:fn/has-class "finaid-rigor-num-input"}))
          "0")
 
-;; Employment status
+;; NOTE: Employment status - Do this multiple times
 (fill driver {:id "finaid-employmentStatus"} "Unemployed")
 
 ;; How much can you afford to pay
@@ -133,32 +139,35 @@
   (get-in dynamic-messages [:degree :hr :reason-for-financial-aid-application]))
 
 
-(def how-this-course-helps-in-my-goals
-  (get-in dynamic-messages [:degree :hr :how-this-course-helps-in-my-goals]))
-
-
-(def why-no-low-interest-loan
-  (get-in dynamic-messages [:degree :hr :why-no-low-interest-loan]))
-
-
-(def dynamic-messages
-  (edn/read-string
-   (slurp "./_secrets/dynamic_messages.edn")))
-
-(def reason-for-financial-aid-application
-  (get-in dynamic-messages [:degree :hr :reason-for-financial-aid-application]))
+(fill-el driver
+         (first (query-all driver {:fn/has-class "big-input-box"}))
+         reason-for-financial-aid-application)
 
 
 (def how-this-course-helps-in-my-goals
   (get-in dynamic-messages [:degree :hr :how-this-course-helps-in-my-goals]))
+
+(fill-el driver
+         (second (query-all driver {:fn/has-class "big-input-box"}))
+         how-this-course-helps-in-my-goals)
+
+
+
 
 
 
 (click-el driver
           (second (query-all driver {:fn/has-class "finaid-radio-button"})))
 
+
+
+
 (def why-no-low-interest-loan
   (get-in dynamic-messages [:degree :hr :why-no-low-interest-loan]))
+
+(fill-el driver
+         (nth (query-all driver {:fn/has-class "big-input-box"}) 2 )
+         why-no-low-interest-loan)
 
 
 (click-el driver
